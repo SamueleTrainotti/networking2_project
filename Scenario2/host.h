@@ -28,7 +28,7 @@ class Host : public cSimpleModule
     cOutVector dataVector, droppedVector, latencyVector;
     cQueue fifo;
 
-    virtual TicTocMsg13 *generateMessage();
+    virtual NetworkMsg *generateMessage();
     virtual void refreshDisplay() const override;
     virtual void initialize() override;
     void sendOrWait(cMessage * msg, const char * gatename, int gateIndex=-1);

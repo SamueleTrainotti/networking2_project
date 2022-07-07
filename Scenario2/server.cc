@@ -4,12 +4,6 @@ using namespace omnetpp;
 
 Define_Module(Server);
 
-
-/*
- * SISTEMARE LA RETE
- * 10 pc OGNI ROUTER
- * */
-
 // DECIDE A CHI INVIARE IL PACCHETTO
 void Server::handleMessage(cMessage *msg) {
 
@@ -18,10 +12,8 @@ void Server::handleMessage(cMessage *msg) {
 
         if (msg->getKind() == types::PING) {
             if (tot != 0) {     // ping if it knows at least one clients
-                TicTocMsg13 *update = generateMessage();
+                NetworkMsg *update = generateMessage();
 
-                // se il server "pinga", non ha senso calcolare la latenza perché non
-                // c'è una risposta
                 update->setNumSeq(-1);
 
                 int i = rand()%(tot);
@@ -29,7 +21,7 @@ void Server::handleMessage(cMessage *msg) {
                 std::advance(itr, i);
                 update->setDestination(*itr);
 
-                int b = 1000;      // aggiornamento periodico mappa
+                int b = 1024;      // aggiornamento periodico mappa
                 update->setByteLength(b);
                 simtime_t t = tranTime("gate$o", 0);
                 if (t <= simTime()) {
@@ -47,10 +39,8 @@ void Server::handleMessage(cMessage *msg) {
 
                 delete update;
             }
-            // schedule next ping
-            //scheduleAt(simTime()+1.0, updates[mID]);
         }
-        if (msg->getKind() == types::TRAN) {    // types::TRAN == 20
+        if (msg->getKind() == types::TRAN) {
             simtime_t t = tranTime("gate$o", 0);
 
             if (t <= simTime()) {
@@ -80,8 +70,8 @@ void Server::handleMessage(cMessage *msg) {
 
         if (msg->getKind() == types::UPDATE) {
             int mID = msg->par("matchID");
-            TicTocMsg13 *update = generateMessage();
-            int b = rand()%(1500-1000+1)+1000;  // aggiornamento periodico
+            NetworkMsg *update = generateMessage();
+            int b = 1024;
             update->setByteLength(b);
             update->setNumSeq(-1);
             for(auto it = matches[mID].partyA->begin(); it != matches[mID].partyA->end(); it++) {
@@ -112,13 +102,11 @@ void Server::handleMessage(cMessage *msg) {
                 }
                 numSent++;
             }
-
-            //delete update;
             scheduleAt(simTime()+0.05, updates[mID]);
         }
     } else {
         if(Host::handle(msg) == 0){
-            TicTocMsg13 *ttmsg = check_and_cast<TicTocMsg13 *>(msg);
+            NetworkMsg *ttmsg = check_and_cast<NetworkMsg *>(msg);
             int i = ttmsg->getSource();
             long n = ttmsg->getNumSeq();
             std::pair<std::set<int>::iterator, bool> ret = clients.insert(i);
@@ -148,9 +136,8 @@ void Server::handleMessage(cMessage *msg) {
                             p->setLongValue(mID);
                             updates[mID]->addPar(p);
                             scheduleAt(simTime()+0.5, updates[mID]);
-                            //std::vector<int> data = {32, }
-                            for (int i = 0; i < 13001; i++) { // 20 MB
-                                TicTocMsg13 *start = generateMessage();
+                            for (int i = 0; i < 4001; i++) {//6,15MB
+                                NetworkMsg *start = generateMessage();
                                 start->setNumSeq(-1);
                                 if (i == 0) {
                                     start->setKind(types::START);
@@ -222,7 +209,6 @@ void Server::handleMessage(cMessage *msg) {
         } // ALTRIMENTI È UN ERRORE QUINDI "SCARTALO"
 
         delete msg;
-        //dropAndDelete(msg);
     }
 }
 
@@ -230,8 +216,6 @@ void Server::handleMessage(cMessage *msg) {
 void Server::initialize() {
     Host::initialize();
 
-    //timeouts.resize(4);
-    //updates.resize(4);
     matches.resize(4);
     for(int i = 0; i < 4; ++i) {
         timeouts.push_back(new cMessage("timeout", types::TIMEOUT));

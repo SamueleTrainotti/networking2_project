@@ -44,7 +44,7 @@ simple Server
         inout gate[];
 }
 
-network Scenario_2
+network Network
 {
     @display("bgb=750,450");
     types:

@@ -40,7 +40,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="org.omnetpp.cdt.gnu.config.debug.131483602.1827245259" name="omnetpp.ini" rcbsApplicability="disable" resourcePath="omnetpp.ini" toolsToInvoke=""/>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -84,7 +83,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="org.omnetpp.cdt.gnu.config.release.323655223.942744862" name="omnetpp.ini" rcbsApplicability="disable" resourcePath="omnetpp.ini" toolsToInvoke=""/>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -104,5 +102,4 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="refreshScope"/>
 </cproject>

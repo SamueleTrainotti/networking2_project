@@ -208,22 +208,22 @@ inline std::ostream& operator<<(std::ostream& out, const std::vector<T,A>& vec)
     return out;
 }
 
-Register_Class(TicTocMsg13)
+Register_Class(NetworkMsg)
 
-TicTocMsg13::TicTocMsg13(const char *name, short kind) : ::omnetpp::cPacket(name, kind)
+NetworkMsg::NetworkMsg(const char *name, short kind) : ::omnetpp::cPacket(name, kind)
 {
 }
 
-TicTocMsg13::TicTocMsg13(const TicTocMsg13& other) : ::omnetpp::cPacket(other)
+NetworkMsg::NetworkMsg(const NetworkMsg& other) : ::omnetpp::cPacket(other)
 {
     copy(other);
 }
 
-TicTocMsg13::~TicTocMsg13()
+NetworkMsg::~NetworkMsg()
 {
 }
 
-TicTocMsg13& TicTocMsg13::operator=(const TicTocMsg13& other)
+NetworkMsg& NetworkMsg::operator=(const NetworkMsg& other)
 {
     if (this == &other) return *this;
     ::omnetpp::cMessage::operator=(other);
@@ -231,7 +231,7 @@ TicTocMsg13& TicTocMsg13::operator=(const TicTocMsg13& other)
     return *this;
 }
 
-void TicTocMsg13::copy(const TicTocMsg13& other)
+void NetworkMsg::copy(const NetworkMsg& other)
 {
     this->source = other.source;
     this->destination = other.destination;
@@ -239,7 +239,7 @@ void TicTocMsg13::copy(const TicTocMsg13& other)
     this->numSeq = other.numSeq;
 }
 
-void TicTocMsg13::parsimPack(omnetpp::cCommBuffer *b) const
+void NetworkMsg::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::omnetpp::cMessage::parsimPack(b);
     doParsimPacking(b,this->source);
@@ -248,7 +248,7 @@ void TicTocMsg13::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->numSeq);
 }
 
-void TicTocMsg13::parsimUnpack(omnetpp::cCommBuffer *b)
+void NetworkMsg::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::omnetpp::cMessage::parsimUnpack(b);
     doParsimUnpacking(b,this->source);
@@ -257,47 +257,47 @@ void TicTocMsg13::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->numSeq);
 }
 
-int TicTocMsg13::getSource() const
+int NetworkMsg::getSource() const
 {
     return this->source;
 }
 
-void TicTocMsg13::setSource(int source)
+void NetworkMsg::setSource(int source)
 {
     this->source = source;
 }
 
-int TicTocMsg13::getDestination() const
+int NetworkMsg::getDestination() const
 {
     return this->destination;
 }
 
-void TicTocMsg13::setDestination(int destination)
+void NetworkMsg::setDestination(int destination)
 {
     this->destination = destination;
 }
 
-int TicTocMsg13::getHopCount() const
+int NetworkMsg::getHopCount() const
 {
     return this->hopCount;
 }
 
-void TicTocMsg13::setHopCount(int hopCount)
+void NetworkMsg::setHopCount(int hopCount)
 {
     this->hopCount = hopCount;
 }
 
-long TicTocMsg13::getNumSeq() const
+long NetworkMsg::getNumSeq() const
 {
     return this->numSeq;
 }
 
-void TicTocMsg13::setNumSeq(long numSeq)
+void NetworkMsg::setNumSeq(long numSeq)
 {
     this->numSeq = numSeq;
 }
 
-class TicTocMsg13Descriptor : public omnetpp::cClassDescriptor
+class NetworkMsgDescriptor : public omnetpp::cClassDescriptor
 {
   private:
     mutable const char **propertynames;
@@ -308,8 +308,8 @@ class TicTocMsg13Descriptor : public omnetpp::cClassDescriptor
         FIELD_numSeq,
     };
   public:
-    TicTocMsg13Descriptor();
-    virtual ~TicTocMsg13Descriptor();
+    NetworkMsgDescriptor();
+    virtual ~NetworkMsgDescriptor();
 
     virtual bool doesSupport(omnetpp::cObject *obj) const override;
     virtual const char **getPropertyNames() const override;
@@ -333,24 +333,24 @@ class TicTocMsg13Descriptor : public omnetpp::cClassDescriptor
     virtual void setFieldStructValuePointer(void *object, int field, int i, void *ptr) const override;
 };
 
-Register_ClassDescriptor(TicTocMsg13Descriptor)
+Register_ClassDescriptor(NetworkMsgDescriptor)
 
-TicTocMsg13Descriptor::TicTocMsg13Descriptor() : omnetpp::cClassDescriptor(omnetpp::opp_typename(typeid(TicTocMsg13)), "omnetpp::cMessage")
+NetworkMsgDescriptor::NetworkMsgDescriptor() : omnetpp::cClassDescriptor(omnetpp::opp_typename(typeid(NetworkMsg)), "omnetpp::cMessage")
 {
     propertynames = nullptr;
 }
 
-TicTocMsg13Descriptor::~TicTocMsg13Descriptor()
+NetworkMsgDescriptor::~NetworkMsgDescriptor()
 {
     delete[] propertynames;
 }
 
-bool TicTocMsg13Descriptor::doesSupport(omnetpp::cObject *obj) const
+bool NetworkMsgDescriptor::doesSupport(omnetpp::cObject *obj) const
 {
-    return dynamic_cast<TicTocMsg13 *>(obj)!=nullptr;
+    return dynamic_cast<NetworkMsg *>(obj)!=nullptr;
 }
 
-const char **TicTocMsg13Descriptor::getPropertyNames() const
+const char **NetworkMsgDescriptor::getPropertyNames() const
 {
     if (!propertynames) {
         static const char *names[] = {  nullptr };
@@ -361,19 +361,19 @@ const char **TicTocMsg13Descriptor::getPropertyNames() const
     return propertynames;
 }
 
-const char *TicTocMsg13Descriptor::getProperty(const char *propertyname) const
+const char *NetworkMsgDescriptor::getProperty(const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? basedesc->getProperty(propertyname) : nullptr;
 }
 
-int TicTocMsg13Descriptor::getFieldCount() const
+int NetworkMsgDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? 3+basedesc->getFieldCount() : 3;
 }
 
-unsigned int TicTocMsg13Descriptor::getFieldTypeFlags(int field) const
+unsigned int NetworkMsgDescriptor::getFieldTypeFlags(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -390,7 +390,7 @@ unsigned int TicTocMsg13Descriptor::getFieldTypeFlags(int field) const
     return (field >= 0 && field < 4) ? fieldTypeFlags[field] : 0; // cambiato 3 a 4
 }
 
-const char *TicTocMsg13Descriptor::getFieldName(int field) const
+const char *NetworkMsgDescriptor::getFieldName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -407,7 +407,7 @@ const char *TicTocMsg13Descriptor::getFieldName(int field) const
     return (field >= 0 && field < 4) ? fieldNames[field] : nullptr; // cambiato 3 a 4
 }
 
-int TicTocMsg13Descriptor::findField(const char *fieldName) const
+int NetworkMsgDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
@@ -418,7 +418,7 @@ int TicTocMsg13Descriptor::findField(const char *fieldName) const
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
-const char *TicTocMsg13Descriptor::getFieldTypeString(int field) const
+const char *NetworkMsgDescriptor::getFieldTypeString(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -435,7 +435,7 @@ const char *TicTocMsg13Descriptor::getFieldTypeString(int field) const
     return (field >= 0 && field < 4) ? fieldTypeStrings[field] : nullptr; // cambiato 3 a 4
 }
 
-const char **TicTocMsg13Descriptor::getFieldPropertyNames(int field) const
+const char **NetworkMsgDescriptor::getFieldPropertyNames(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -448,7 +448,7 @@ const char **TicTocMsg13Descriptor::getFieldPropertyNames(int field) const
     }
 }
 
-const char *TicTocMsg13Descriptor::getFieldProperty(int field, const char *propertyname) const
+const char *NetworkMsgDescriptor::getFieldProperty(int field, const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -461,7 +461,7 @@ const char *TicTocMsg13Descriptor::getFieldProperty(int field, const char *prope
     }
 }
 
-int TicTocMsg13Descriptor::getFieldArraySize(void *object, int field) const
+int NetworkMsgDescriptor::getFieldArraySize(void *object, int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -469,13 +469,13 @@ int TicTocMsg13Descriptor::getFieldArraySize(void *object, int field) const
             return basedesc->getFieldArraySize(object, field);
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
         default: return 0;
     }
 }
 
-void TicTocMsg13Descriptor::setFieldArraySize(void *object, int field, int size) const
+void NetworkMsgDescriptor::setFieldArraySize(void *object, int field, int size) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -485,13 +485,13 @@ void TicTocMsg13Descriptor::setFieldArraySize(void *object, int field, int size)
         }
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
-        default: throw omnetpp::cRuntimeError("Cannot set array size of field %d of class 'TicTocMsg13'", field);
+        default: throw omnetpp::cRuntimeError("Cannot set array size of field %d of class 'NetworkMsg'", field);
     }
 }
 
-const char *TicTocMsg13Descriptor::getFieldDynamicTypeString(void *object, int field, int i) const
+const char *NetworkMsgDescriptor::getFieldDynamicTypeString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -499,13 +499,13 @@ const char *TicTocMsg13Descriptor::getFieldDynamicTypeString(void *object, int f
             return basedesc->getFieldDynamicTypeString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }
 }
 
-std::string TicTocMsg13Descriptor::getFieldValueAsString(void *object, int field, int i) const
+std::string NetworkMsgDescriptor::getFieldValueAsString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -513,7 +513,7 @@ std::string TicTocMsg13Descriptor::getFieldValueAsString(void *object, int field
             return basedesc->getFieldValueAsString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
         case FIELD_source: return long2string(pp->getSource());
         case FIELD_destination: return long2string(pp->getDestination());
@@ -523,7 +523,7 @@ std::string TicTocMsg13Descriptor::getFieldValueAsString(void *object, int field
     }
 }
 
-void TicTocMsg13Descriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
+void NetworkMsgDescriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -533,17 +533,17 @@ void TicTocMsg13Descriptor::setFieldValueAsString(void *object, int field, int i
         }
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
         case FIELD_source: pp->setSource(string2long(value)); break;
         case FIELD_destination: pp->setDestination(string2long(value)); break;
         case FIELD_hopCount: pp->setHopCount(string2long(value)); break;
         case FIELD_numSeq: pp->setNumSeq(string2long(value)); break;
-        default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'TicTocMsg13'", field);
+        default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'NetworkMsg'", field);
     }
 }
 
-const char *TicTocMsg13Descriptor::getFieldStructName(int field) const
+const char *NetworkMsgDescriptor::getFieldStructName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -556,7 +556,7 @@ const char *TicTocMsg13Descriptor::getFieldStructName(int field) const
     };
 }
 
-void *TicTocMsg13Descriptor::getFieldStructValuePointer(void *object, int field, int i) const
+void *NetworkMsgDescriptor::getFieldStructValuePointer(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -564,13 +564,13 @@ void *TicTocMsg13Descriptor::getFieldStructValuePointer(void *object, int field,
             return basedesc->getFieldStructValuePointer(object, field, i);
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }
 }
 
-void TicTocMsg13Descriptor::setFieldStructValuePointer(void *object, int field, int i, void *ptr) const
+void NetworkMsgDescriptor::setFieldStructValuePointer(void *object, int field, int i, void *ptr) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -580,9 +580,9 @@ void TicTocMsg13Descriptor::setFieldStructValuePointer(void *object, int field, 
         }
         field -= basedesc->getFieldCount();
     }
-    TicTocMsg13 *pp = (TicTocMsg13 *)object; (void)pp;
+    NetworkMsg *pp = (NetworkMsg *)object; (void)pp;
     switch (field) {
-        default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'TicTocMsg13'", field);
+        default: throw omnetpp::cRuntimeError("Cannot set field %d of class 'NetworkMsg'", field);
     }
 }
 

@@ -26,8 +26,8 @@ class Router : public cSimpleModule
     virtual void refreshDisplay() const override;
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
-    virtual void routing(TicTocMsg13* pkt);
-    void sendOrWait(TicTocMsg13* pkt, const char * gatename, int gateIndex=-1);
+    virtual void routing(NetworkMsg* pkt);
+    void sendOrWait(NetworkMsg* pkt, const char * gatename, int gateIndex=-1);
     simtime_t tranTime(const char * gatename, int gateIndex=-1);
 };
 

@@ -9,38 +9,36 @@
 // and cannot be removed from it.
 // 
 
-import inet.node.ethernet.Eth400G;
-import inet.node.ethernet.Eth200G;
-import inet.examples.mobileipv6.fiberline;
-import inet.visualizer.common.IntegratedVisualizer;
-import inet.visualizer.common.RadioVisualizer;
-import ned.DatarateChannel;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 import inet.networklayer.ipv4.RoutingTableRecorder;
-import inet.node.ethernet.Eth10G;
-import inet.node.ethernet.Eth10M;
+import inet.node.ethernet.Eth400G;
 import inet.node.inet.Router;
 import inet.node.inet.StandardHost;
+import inet.visualizer.common.IntegratedVisualizer;
 import simu5g.common.binder.Binder;
 import simu5g.common.carrierAggregation.CarrierAggregation;
+import simu5g.nodes.Upf;
 import simu5g.nodes.NR.gNodeB;
-import simu5g.nodes.Ue;
-import simu5g.nodes.eNodeB;
-import simu5g.nodes.PgwStandard;
-import simu5g.stack.phy.ChannelModel.NRChannelModel;
+import simu5g.nodes.NR.NRUe;
+import simu5g.nodes.backgroundCell.BackgroundCell;
 import simu5g.world.radio.LteChannelControl;
 
-
+// SingleCell_standalone
+//
+// This network represents the deployment option 3 in 3GPP 38.801
+//
 network SingleCell
 {
     parameters:
-        int numUe = default(10);
-        @display("i=block/network2;bgb=991,558;bgi=background/budapest");
+        int numUe = default(1);
+        int numBgCells = default(0);
+        @display("i=block/network2;bgb=926,608;");
     submodules:
         channelControl: LteChannelControl {
             @display("p=50,25;is=s");
             pMax = default(2000mW);
             carrierFrequency = default(3.7GHz);
+            numChannels = default(20);
         }
         routingRecorder: RoutingTableRecorder {
             @display("p=50,75;is=s");
@@ -50,54 +48,87 @@ network SingleCell
         }
         binder: Binder {
             @display("p=50,175;is=s");
-            //maxDataRatePerRb = default(1.16Gbps);
-            maxDataRatePerRb = default(1.16Gbps);
+            maxDataRatePerRb = default(10.16Gbps);
         }
         carrierAggregation: CarrierAggregation {
             @display("p=50.993748,258.7;is=s");
         }
         server: StandardHost {
-            @display("p=910.425,74.625;is=n;i=device/server");
+            @display("p=511.632,45.288;is=n;i=device/server");
         }
         router: Router {
-            @display("p=711.425,73.38125;i=device/smallrouter");
+            @display("p=511.632,172.584;i=device/smallrouter");
         }
-        pgw: PgwStandard {
-            @display("p=450.2375,74.625;is=l");
+        upf: Upf {
+            @display("p=510.408,323.136;is=l");
         }
-//        eNB1: eNodeB {
-//            @display("p=360,330;is=vl");
-//            txPower = default(2000mw);
+        gnb1: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb2: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb3: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb4: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb5: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb6: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb7: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+        gnb8: gNodeB {
+            @display("p=726.35,277.35626;is=l");
+        }
+//        gnb9: gNodeB {
+//            @display("p=726.35,277.35626;is=l");
 //        }
-        eNB2: eNodeB {
-            @display("p=530,330;is=vl");
-            masterId = default(2);
-            macCellId = default(2);
-            txPower = default(2000mw);
+//        gnb10: gNodeB {
+//            @display("p=726.35,277.35626;is=l");
+//        }
+//        gnb11: gNodeB {
+//            @display("p=726.35,277.35626;is=l");
+//        }
+//        gnb12: gNodeB {
+//            @display("p=726.35,277.35626;is=l");
+//        }
+        bgCell[numBgCells]: BackgroundCell {
+            @display("p=416,277;is=vl");
         }
-        ueArea1[numUe]: Ue {
-            @display("p=401.48123,351.98126");
+        ueArea1[numUe]: NRUe {
+            @display("p=250,225;is=s");
         }
-        ueArea2[numUe]: Ue {
-            @display("p=426.48123,351.98126");
+        ueArea2[numUe]: NRUe {
+            @display("p=650,225;is=s");
         }
-        ueArea3[numUe]: Ue {
-            @display("p=451.48123,351.98126");
+        ueArea3[numUe]: NRUe {
+            @display("p=250,425;is=s");
         }
-        ueArea4[numUe]: Ue {
-            @display("p=476.48123,351.98126");
-        }
-        gNB: gNodeB {
-            @display("p=359.44376,351.98126");
-            gateway = default("pgw");
-            masterId = default(1);
-            macCellId = default(1);
-            txPower = default(2000mw);
+        ueArea4[numUe]: NRUe {
+            @display("p=650,425;is=s");
         }
     connections:
         server.pppg++ <--> Eth400G <--> router.pppg++;
-        router.pppg++ <--> Eth400G <--> pgw.filterGate;
-        //pgw.pppg++ <--> Eth400G <--> eNB1.ppp;
-        pgw.pppg++ <--> Eth400G <--> eNB2.ppp;
-        pgw.pppg++ <--> Eth400G <--> gNB.ppp;
+        router.pppg++ <--> Eth400G <--> upf.filterGate;
+        // group-left
+        upf.pppg++ <--> Eth400G <--> gnb1.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb2.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb3.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb4.ppp;
+        // group-right
+        upf.pppg++ <--> Eth400G <--> gnb5.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb6.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb7.ppp;
+        upf.pppg++ <--> Eth400G <--> gnb8.ppp;
+        // group-center
+//        upf.pppg++ <--> Eth400G <--> gnb9.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb10.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb11.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb12.ppp;
 }

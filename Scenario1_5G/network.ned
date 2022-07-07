@@ -35,7 +35,7 @@ network SingleCell
         int numUeConsole = default(3);
         int numUeSimulator = default(5);
         int numBgCells = default(0);
-        @display("i=block/network2;bgb=926,608;bgi=background/pisa");
+        @display("i=block/network2;bgb=926,608");
     submodules:
         channelControl: LteChannelControl {
             @display("p=50,25;is=s");
@@ -90,6 +90,34 @@ network SingleCell
         gnb8: gNodeB {
             @display("p=726.35,277.35626;is=l");
         }
+        // --------------------------------------------------------------------
+//                
+//                gnb9: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb10: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb11: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb12: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb13: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb14: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb15: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }
+//                gnb16: gNodeB {
+//                    @display("p=726.35,277.35626;is=l");
+//                }        
+//                
+        // --------------------------------------------------------------------
         bgCell[numBgCells]: BackgroundCell {
             @display("p=416,277;is=vl");
         }
@@ -109,8 +137,8 @@ network SingleCell
         server[0].pppg++ <--> Eth400G <--> router.pppg++;
         server[1].pppg++ <--> Eth400G <--> router.pppg++;
         server[2].pppg++ <--> Eth400G <--> router.pppg++;
-        server[3].pppg++ <--> Eth400G <--> router.pppg++; 
-		router.pppg++ <--> Eth400G <--> upf.filterGate;
+        server[3].pppg++ <--> Eth400G <--> router.pppg++;
+        router.pppg++ <--> Eth400G <--> upf.filterGate;
         upf.pppg++ <--> Eth400G <--> gnb1.ppp;
         upf.pppg++ <--> Eth400G <--> gnb2.ppp;
         upf.pppg++ <--> Eth400G <--> gnb3.ppp;
@@ -119,5 +147,19 @@ network SingleCell
         upf.pppg++ <--> Eth400G <--> gnb6.ppp;
         upf.pppg++ <--> Eth400G <--> gnb7.ppp;
         upf.pppg++ <--> Eth400G <--> gnb8.ppp;
+
+
+        //----------------------------------------------------
+//        
+//        upf.pppg++ <--> Eth400G <--> gnb9.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb10.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb11.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb12.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb13.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb14.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb15.ppp;
+//        upf.pppg++ <--> Eth400G <--> gnb16.ppp;
+//        
+        //---------------------------------------------------
 }
 

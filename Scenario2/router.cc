@@ -21,13 +21,13 @@ void Router::refreshDisplay() const
 void Router::handleMessage(cMessage* msg) {
 
     if (msg->isSelfMessage()) {
-        routing(check_and_cast<TicTocMsg13 *>(fifo.pop()));
+        routing(check_and_cast<NetworkMsg *>(fifo.pop()));
 
         if(tran->isScheduled() == 0 && fifo.getLength() != 0) {
-            scheduleAt(simTime()+0.001, tran);   // che schifo!!!
+            scheduleAt(simTime()+0.001, tran);
         }
     } else {
-        TicTocMsg13 *ttmsg = check_and_cast<TicTocMsg13 *>(msg);
+        NetworkMsg *ttmsg = check_and_cast<NetworkMsg *>(msg);
         if (ttmsg->hasBitError() == 0) {
 
             ttmsg->setHopCount(ttmsg->getHopCount()+1);
@@ -44,9 +44,9 @@ void Router::handleMessage(cMessage* msg) {
     }
 }
 
-void Router::routing(TicTocMsg13* pkt) {}
+void Router::routing(NetworkMsg* pkt) {}
 
-void Router::sendOrWait(TicTocMsg13* pkt, const char * gatename, int gateIndex) {
+void Router::sendOrWait(NetworkMsg* pkt, const char * gatename, int gateIndex) {
     simtime_t t = tranTime(gatename, gateIndex);
     if (t <= simTime()) {
         send(pkt->dup(), gatename, gateIndex);

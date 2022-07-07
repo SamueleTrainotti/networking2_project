@@ -30,10 +30,9 @@ void Host::initialize()
 // INCREMENTA PACCHETTI RICEVUTI
 // CONTROLLA SE IL MESSAGGIO HA UN FLAG DI ERRORE
 // CONTROLLA SE IL MESSAGGIO È ARRIVATO ALL'HOST DI DESTINAZIONE
-
 bool Host::handle(cMessage *msg)
 {
-    TicTocMsg13 *ttmsg = check_and_cast<TicTocMsg13 *>(msg);
+    NetworkMsg *ttmsg = check_and_cast<NetworkMsg *>(msg);
     numReceived++;
 
     if (ttmsg->hasBitError()) {
@@ -60,13 +59,13 @@ bool Host::handle(cMessage *msg)
 }
 
 // CREA PACCHETTO E IMPOSTA DESTINAZIONE E "COLORE"
-TicTocMsg13 *Host::generateMessage() {
+NetworkMsg *Host::generateMessage() {
     char msgname[20];
 
     sprintf(msgname, "%d", getId());
 
     // Create message object and set source and destination field.
-    TicTocMsg13 *msg = new TicTocMsg13(msgname);
+    NetworkMsg *msg = new NetworkMsg(msgname);
 
     int src = getId();
 

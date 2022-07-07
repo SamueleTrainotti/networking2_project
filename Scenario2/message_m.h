@@ -18,7 +18,7 @@
 
 
 
-class TicTocMsg13;
+class NetworkMsg;
 /**
  * Class generated from <tt>message.msg:16</tt> by nedtool.
  * <pre>
@@ -36,7 +36,7 @@ class TicTocMsg13;
  * // You should have received a copy of the GNU Lesser General Public License
  * // along with this program.  If not, see http://www.gnu.org/licenses/.
  * //
- * message TicTocMsg13
+ * message NetworkMsg
  * {
  *     int source;
  *     int destination;
@@ -44,7 +44,7 @@ class TicTocMsg13;
  * }
  * </pre>
  */
-class TicTocMsg13 : public ::omnetpp::cPacket
+class NetworkMsg : public ::omnetpp::cPacket
 {
   protected:
     int source = 0;
@@ -53,17 +53,17 @@ class TicTocMsg13 : public ::omnetpp::cPacket
     long numSeq = 0;
 
   private:
-    void copy(const TicTocMsg13& other);
+    void copy(const NetworkMsg& other);
 
   protected:
-    bool operator==(const TicTocMsg13&) = delete;
+    bool operator==(const NetworkMsg&) = delete;
 
   public:
-    TicTocMsg13(const char *name=nullptr, short kind=0);
-    TicTocMsg13(const TicTocMsg13& other);
-    virtual ~TicTocMsg13();
-    TicTocMsg13& operator=(const TicTocMsg13& other);
-    virtual TicTocMsg13 *dup() const override {return new TicTocMsg13(*this);}
+    NetworkMsg(const char *name=nullptr, short kind=0);
+    NetworkMsg(const NetworkMsg& other);
+    virtual ~NetworkMsg();
+    NetworkMsg& operator=(const NetworkMsg& other);
+    virtual NetworkMsg *dup() const override {return new NetworkMsg(*this);}
     virtual void parsimPack(omnetpp::cCommBuffer *b) const override;
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
@@ -78,8 +78,8 @@ class TicTocMsg13 : public ::omnetpp::cPacket
     virtual void setNumSeq(long numSeq);
 };
 
-inline void doParsimPacking(omnetpp::cCommBuffer *b, const TicTocMsg13& obj) {obj.parsimPack(b);}
-inline void doParsimUnpacking(omnetpp::cCommBuffer *b, TicTocMsg13& obj) {obj.parsimUnpack(b);}
+inline void doParsimPacking(omnetpp::cCommBuffer *b, const NetworkMsg& obj) {obj.parsimPack(b);}
+inline void doParsimUnpacking(omnetpp::cCommBuffer *b, NetworkMsg& obj) {obj.parsimUnpack(b);}
 
 #endif // ifndef __MESSAGE_M_H
 

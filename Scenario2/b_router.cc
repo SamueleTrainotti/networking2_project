@@ -11,13 +11,13 @@ using namespace omnetpp;
 class Brouter : public Router
 {
 protected:
-    void routing(TicTocMsg13* pkt) override;
+    void routing(NetworkMsg* pkt) override;
 };
 
 Define_Module(Brouter);
 
 // DECIDE A CHI INOLTRARE IL PACCHETTO RICEVUTO
-void Brouter::routing(TicTocMsg13* pkt)
+void Brouter::routing(NetworkMsg* pkt)
 {
     if(pkt->arrivedOn("gate_net$i")) {
         sendOrWait(pkt, "gate_servers$o", 0);

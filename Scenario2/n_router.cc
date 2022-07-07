@@ -11,14 +11,14 @@ using namespace omnetpp;
 class Nrouter : public Router
 {
     protected:
-    void routing(TicTocMsg13* pkt) override;
+    void routing(NetworkMsg* pkt) override;
 };
 
 Define_Module(Nrouter);
 
 
 // DECIDE A CHI INOLTRARE IL PACCHETTO RICEVUTO
-void Nrouter::routing(TicTocMsg13* pkt)
+void Nrouter::routing(NetworkMsg* pkt)
 {
     totData += pkt->getByteLength();
     data.collect(totData);

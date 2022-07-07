@@ -13,7 +13,7 @@ protected:
     int matchID;
     long numSeq = 0;
     std::list<int> n_burst;
-    TicTocMsg13 *generateMessage() override;
+    NetworkMsg *generateMessage() override;
     void initialize() override;
     void handleMessage(cMessage *msg) override;
 };
@@ -26,7 +26,7 @@ void Client::initialize()
     Host::initialize();
     WATCH_LIST(n_burst);
     matchID = (getId()-8)/10;
-    TicTocMsg13 *m = Host::generateMessage();
+    NetworkMsg *m = Host::generateMessage();
     m->setDestination(2);
     m->setKind(types::MATCH);
     cMsgPar *p = new cMsgPar("matchID");
@@ -51,7 +51,7 @@ void Client::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
         if(msg->getKind() == types::TIMEOUT) {
-            TicTocMsg13 *m = Host::generateMessage();
+            NetworkMsg *m = Host::generateMessage();
             m->setDestination(2);
             m->setKind(types::MATCH);
             cMsgPar *p = new cMsgPar("matchID");
@@ -64,7 +64,7 @@ void Client::handleMessage(cMessage *msg)
             n_burst.push_back(burst);
             //int burst = 1;
             for(int i = 0; i < burst; i++) {
-                TicTocMsg13 *pong = generateMessage();
+                NetworkMsg *pong = generateMessage();
 
                 simtime_t t = tranTime("gate$o", 0);
                 if (t <= simTime()) {
@@ -102,18 +102,16 @@ void Client::handleMessage(cMessage *msg)
 }
 
 // IMPOSTA DESTINAZIONE SEMI-CASUALE IN BASE ALLA SOTTORETE
-TicTocMsg13 *Client::generateMessage()
+NetworkMsg *Client::generateMessage()
 {
-    TicTocMsg13 *msg = Host::generateMessage();
+    NetworkMsg *msg = Host::generateMessage();
 
     //Solo 1 server, id=2
     msg->setDestination(2);
 
-    int b = rand()%(1500-1000+1)+1000;
-    //data.collect(b);
-    //dataVector.record(b);
+    int b = 1024;
     totData += b;
 
-    msg->setByteLength(b); // circa 'b' KB
+    msg->setByteLength(b);
     return msg;
 }
