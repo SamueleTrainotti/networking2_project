@@ -53,7 +53,7 @@ network SingleCell
         carrierAggregation: CarrierAggregation {
             @display("p=50.993748,258.7;is=s");
         }
-        server: StandardHost {
+       edge_Server: StandardHost {
             @display("p=511.632,45.288;is=n;i=device/server");
         }
         router: Router {
@@ -114,7 +114,7 @@ network SingleCell
             @display("p=650,425;is=s");
         }
     connections:
-        server.pppg++ <--> Eth400G <--> router.pppg++;
+       edge_Server.pppg++ <--> Eth400G <--> router.pppg++;
         router.pppg++ <--> Eth400G <--> upf.filterGate;
         // group-left
         upf.pppg++ <--> Eth400G <--> gnb1.ppp;

@@ -54,7 +54,7 @@ network Network
             per = 1e-3; // ERRORI PACCHETTI
         }
     submodules:
-        server[5]: Server {
+        backbone_Server[5]: Server {
             @display("p=200,50,m,5,100,50");
             @display("i=device/server");
         }
@@ -115,11 +115,11 @@ network Network
         router[3].gate_hosts++ <--> Channel <--> hostsarea4[2].gate++;
 
 
-        server[0].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
-        server[1].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
-        server[2].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
-        server[3].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
-        server[4].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+        backbone_Server[0].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+        backbone_Server[1].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+        backbone_Server[2].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+        backbone_Server[3].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+        backbone_Server[4].gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
 
         bRouter.gate_net++ <--> Channel <--> router[0].gate_backbone++;
         bRouter.gate_net++ <--> Channel <--> router[1].gate_backbone++;

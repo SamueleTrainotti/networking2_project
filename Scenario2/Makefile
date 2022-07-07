@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for Scenario2
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -KINET4_3_PROJ=../inet4.3 -DINET_IMPORT -I. -I$$\(INET4_3_PROJ\)/src -L$$\(INET4_3_PROJ\)/src -lINET$$\(D\)
+#  opp_makemake -f --deep -O out -KINET4_3_PROJ=../../inet4.3 -DINET_IMPORT -I. -I$$\(INET4_3_PROJ\)/src -L$$\(INET4_3_PROJ\)/src -lINET$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -50,7 +50,7 @@ MSGFILES = \
 SMFILES =
 
 # Other makefile variables (-K)
-INET4_3_PROJ=../inet4.3
+INET4_3_PROJ=../../inet4.3
 
 #------------------------------------------------------------------------------
 

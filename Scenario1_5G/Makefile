@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for Scenario1_5G
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -KINET4_3_PROJ=../inet4.3 -KSIMU5G_PROJ=../simu5G -DINET_IMPORT -I. -I$$\(INET4_3_PROJ\)/src -I$$\(SIMU5G_PROJ\)/src -L$$\(INET4_3_PROJ\)/src -L$$\(SIMU5G_PROJ\)/src -lINET$$\(D\) -lsimu5g$$\(D\)
+#  opp_makemake -f --deep -O out -KINET4_3_PROJ=../../inet4.3 -KSIMU5G_PROJ=../../simu5G -DINET_IMPORT -I. -I$$\(INET4_3_PROJ\)/src -I$$\(SIMU5G_PROJ\)/src -L$$\(INET4_3_PROJ\)/src -L$$\(SIMU5G_PROJ\)/src -lINET$$\(D\) -lsimu5g$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -42,8 +42,8 @@ MSGFILES =
 SMFILES =
 
 # Other makefile variables (-K)
-INET4_3_PROJ=../inet4.3
-SIMU5G_PROJ=../simu5G
+INET4_3_PROJ=../../inet4.3
+SIMU5G_PROJ=../../simu5G
 
 #------------------------------------------------------------------------------
 

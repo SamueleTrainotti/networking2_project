@@ -55,7 +55,7 @@ network Network
             //delay = 100ms;
         }
     submodules:
-        server: Server {
+       backbone_Server: Server {
             @display("i=device/server;p=350,150");
         }
         bRouter: Brouter {
@@ -148,7 +148,7 @@ network Network
         router[3].gate_hosts++ <--> Channel <--> hostsarea7[4].gate++;
 
 
-        server.gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
+       backbone_Server.gate++ <--> Channel {  delay = 20ms; } <--> bRouter.gate_servers++;
 
         bRouter.gate_net++ <--> Channel <--> router[0].gate_backbone++;
         bRouter.gate_net++ <--> Channel <--> router[1].gate_backbone++;
